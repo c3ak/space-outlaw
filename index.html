@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SPACE OUTLAW</title>
+<meta name="description" content="스페이스오페라·사이버펑크·서부극 롤플레잉 SPACE OUTLAW. 법이 닿지 않는 두 성계, 다섯 행성과 그곳의 사람들.">
+<meta property="og:title" content="SPACE OUTLAW">
+<meta property="og:description" content="법이 닿지 않는 두 성계. 스페이스오페라·사이버펑크·서부극 롤플레잉.">
+<meta property="og:image" content="img/gate.webp">
+<meta name="theme-color" content="#0b1019">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+/* 항로 기록부: 먼 개척지의 수배 전단과 함선 항법 화면이 한 장에 겹친 모양.
+   어두운 우주 바탕 하나로만 간다 (그림이 밝아 바탕이 어두워야 산다). */
+:root {
+  --void: #0b1019;        /* 바탕: 푸른 기가 도는 어둠 */
+  --hull: #131b28;        /* 판: 선체 금속 */
+  --hull-2: #1a2434;
+  --line: #2a384d;        /* 가는 줄 */
+  --dust: #ece4d4;        /* 글: 오래된 종이빛 */
+  --dim: #9ea8b6;
+  --brass: #e2a64b;       /* 강조: 놋쇠, 별빛 */
+  --rust: #c95b35;        /* 경고: 녹, 수배 */
+  --signal: #7cc4d2;      /* 항법 화면 */
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --display-ko: "Black Han Sans", "IBM Plex Sans KR", "Malgun Gothic", sans-serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --mono: "IBM Plex Mono", "Consolas", "D2Coding", monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.5rem, 6vw, 4rem);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--dust);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+a { color: var(--brass); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: clamp(56px, 9vw, 104px); border-top: 1px solid var(--line); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.section-head { display: grid; gap: 10px; margin-bottom: clamp(28px, 5vw, 48px); max-width: 44rem; }
+.section-head h2 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-3); line-height: 1.25; letter-spacing: 0.01em; }
+.section-head p { color: var(--dim); }
+
+/* ── 첫 화면 ── */
+.hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero-art { position: absolute; inset: 0; z-index: -2; }
+.hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(11 16 25 / 0.94) 0%, rgb(11 16 25 / 0.78) 42%, rgb(11 16 25 / 0.2) 75%, rgb(11 16 25 / 0.45) 100%),
+    linear-gradient(0deg, var(--void) 0%, rgb(11 16 25 / 0) 38%);
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(24px, 4vw, 56px);
+  padding-block: clamp(72px, 12vw, 148px) clamp(48px, 7vw, 80px);
+}
+.hero-copy { display: grid; gap: 18px; min-width: 0; }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3.4rem, 11vw, 8.5rem);
+  line-height: 0.86;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.hero h1 span { display: block; color: var(--brass); }
+.hero .ko-title { font-family: var(--display-ko); font-size: var(--step-2); color: var(--dust); letter-spacing: 0.02em; }
+.hero .lead { max-width: 34rem; color: #d6d9de; font-size: var(--step-1); line-height: 1.75; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  font-family: var(--mono); font-size: var(--step--1); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--brass);
+  border-radius: 2px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.btn-solid { background: var(--brass); color: #1c1407; }
+.btn-solid:hover { background: #f0b862; }
+.btn-ghost { color: var(--brass); background: rgb(11 16 25 / 0.5); }
+.btn-ghost:hover { background: rgb(226 166 75 / 0.14); }
+.btn[aria-disabled="true"] { cursor: default; }
+.btn-solid[aria-disabled="true"] { background: var(--hull-2); color: var(--dim); border-color: var(--line); }
+.btn .soon { font-size: 0.72rem; letter-spacing: 0.06em; color: var(--dim); text-transform: none; }
+
+/* 상태창: 게임이 매 응답 끝에 내놓는 정보창 */
+.status {
+  min-width: 0;
+  background: rgb(10 15 23 / 0.86);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--signal);
+  backdrop-filter: blur(6px);
+}
+.status-bar { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--signal); text-transform: uppercase; }
+.status pre { margin: 0; padding: 14px; font-family: var(--mono); font-size: 0.8rem; line-height: 1.75; color: #cfe3e8; white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+.status pre b { color: var(--brass); font-weight: 500; }
+.status figcaption { padding: 8px 14px 12px; font-size: 0.78rem; color: var(--dim); }
+
+/* ── 연대기 ── */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); counter-reset: era; }
+.timeline li { padding: 22px 22px 6px 0; display: grid; gap: 8px; align-content: start; min-width: 0; counter-increment: era; position: relative; }
+.timeline li + li { padding-left: 22px; border-left: 1px solid var(--line); }
+.timeline li::before { content: counter(era, decimal-leading-zero); font-family: var(--mono); font-size: var(--step--1); color: var(--brass); letter-spacing: 0.1em; }
+.timeline h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.timeline p { color: var(--dim); font-size: 0.95rem; }
+
+/* ── 항로도 ── */
+.chart { overflow-x: auto; border: 1px solid var(--line); background: radial-gradient(ellipse at 50% 40%, #121a29 0%, var(--void) 70%); }
+.chart svg { display: block; width: 100%; min-width: 660px; height: auto; }
+.chart text { font-family: var(--body); }
+.chart .mono { font-family: var(--mono); }
+.chart a { cursor: pointer; }
+.chart a:hover .planet, .chart a:focus .planet { stroke: var(--dust); stroke-width: 2; }
+.chart-note { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--mono); font-size: var(--step--1); color: var(--dim); }
+.chart-note span::before { content: ""; display: inline-block; width: 22px; height: 0; vertical-align: middle; margin-right: 8px; border-top: 1px solid var(--dim); }
+.chart-note .warp::before { border-top: 1.5px dashed var(--brass); }
+
+/* ── 행성 기록 ── */
+.planets { display: grid; gap: clamp(40px, 6vw, 72px); margin-top: clamp(48px, 7vw, 88px); }
+.planet-entry { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: center; scroll-margin-top: 24px; }
+.planet-entry:nth-child(even) .planet-art { order: 2; }
+.planet-art { position: relative; min-width: 0; border: 1px solid var(--line); }
+.planet-art img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.tag {
+  position: absolute; left: 12px; top: 12px;
+  padding: 4px 9px;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  background: rgb(11 16 25 / 0.82); color: var(--signal); border: 1px solid var(--line);
+}
+.planet-copy { display: grid; gap: 14px; min-width: 0; }
+.planet-copy .name { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
+.planet-copy h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-3); line-height: 1.1; }
+.planet-copy .latin { font-family: var(--display); font-weight: 700; font-size: var(--step-1); letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); }
+.planet-copy > p { color: #d3d7dd; max-width: 34rem; }
+.facts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 0.92rem; }
+.facts dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--signal); padding-top: 3px; }
+.facts dd { margin: 0; color: var(--dust); }
+
+/* ── 세력 ── */
+.factions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.faction { background: var(--hull); padding: 22px 22px 24px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.faction .where { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); }
+.faction h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.faction p { color: var(--dim); font-size: 0.95rem; }
+
+/* ── 쓰는 말 ── */
+.lexicon { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
+.ships { overflow-x: auto; }
+.ships table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.ships caption { text-align: left; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); padding-bottom: 10px; }
+.ships th, .ships td { text-align: left; vertical-align: top; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); }
+.ships thead th { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; color: var(--dim); }
+.ships tbody th { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); white-space: nowrap; }
+.ships td.crew { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--brass); }
+.terms { margin: 0; display: grid; gap: 18px; }
+.terms div { display: grid; gap: 4px; }
+.terms dt { font-family: var(--display-ko); font-size: var(--step-1); }
+.terms dt small { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--signal); margin-left: 8px; }
+.terms dd { margin: 0; color: var(--dim); font-size: 0.95rem; }
+.junk { margin-top: clamp(28px, 5vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 1px solid var(--line); background: var(--hull); }
+.junk img { width: 100%; height: 100%; object-fit: cover; min-height: 220px; }
+.junk-copy { padding: clamp(20px, 3vw, 32px); display: grid; gap: 10px; align-content: center; min-width: 0; }
+.junk-copy h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-2); }
+.junk-copy p { color: var(--dim); }
+
+/* 살리옥신: 병에 붙은 경고 딱지 */
+.label {
+  margin-top: clamp(28px, 5vw, 48px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0;
+  border: 1px solid var(--rust);
+  background: linear-gradient(180deg, rgb(201 91 53 / 0.1), rgb(201 91 53 / 0.02));
+}
+.label > div { padding: 20px 22px; min-width: 0; display: grid; gap: 8px; align-content: start; }
+.label > div + div { border-left: 1px solid rgb(201 91 53 / 0.45); }
+.label h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-2); color: #f2b38e; }
+.label .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); }
+.label ul { margin: 0; padding-left: 1.1em; color: var(--dust); font-size: 0.95rem; display: grid; gap: 2px; }
+.label p { color: var(--dim); font-size: 0.95rem; }
+
+/* ── 사람들 ── */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filters button {
+  font: inherit; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em;
+  padding: 7px 13px; border-radius: 2px; cursor: pointer;
+  color: var(--dim); background: transparent; border: 1px solid var(--line);
+}
+.filters button[aria-pressed="true"] { color: #1c1407; background: var(--brass); border-color: var(--brass); }
+.cast { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cast li { background: var(--hull); padding: 0 0 18px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.cast li > p { padding-inline: 18px; }
+/* 인물 그림: 얼굴부터 허리까지 */
+.cast .face { aspect-ratio: 4 / 5; max-width: 100%; overflow: hidden; margin-bottom: 12px; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 30%, #24324a 0%, #151d2b 60%, #10161f 100%); }
+.cast .face img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 4%; transition: transform .3s ease; }
+.cast li:hover .face img { transform: scale(1.04); }
+.cast li[hidden] { display: none !important; }
+.cast .who { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.cast .who b { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.cast .who span { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--signal); white-space: nowrap; }
+.cast .role { color: var(--brass); font-size: 0.9rem; }
+.cast .trait { color: var(--dim); font-size: 0.9rem; }
+.cast .arms { font-family: var(--mono); font-size: 0.75rem; color: #b9c2cd; margin-top: 4px; }
+
+/* ── 놀이 방식 ── */
+.play-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
+.steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+.steps li { display: grid; gap: 4px; padding-left: 18px; border-left: 2px solid var(--line); }
+.steps b { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.steps span { color: var(--dim); font-size: 0.95rem; }
+.ladder { border: 1px solid var(--line); background: var(--hull); padding: 20px 22px; display: grid; gap: 14px; min-width: 0; }
+.ladder h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ladder li { display: grid; justify-items: center; gap: 2px; min-width: 52px; padding: 8px 6px; border: 1px solid var(--line); background: var(--void); }
+.ladder li .e { font-size: 1.35rem; line-height: 1.2; }
+.ladder li .t { font-size: 0.7rem; color: var(--dim); white-space: nowrap; }
+.ladder p { color: var(--dim); font-size: 0.9rem; }
+
+/* 입력창 명령: 대화 입력창 모양 */
+.command { margin-top: clamp(28px, 5vw, 48px); border: 1px solid var(--line); background: var(--hull); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.command-copy { padding: clamp(20px, 3vw, 30px); display: grid; gap: 10px; align-content: center; min-width: 0; }
+.command-copy h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-2); }
+.command-copy p { color: var(--dim); }
+.command-copy code, .steps code { font-family: var(--mono); color: var(--brass); }
+.command-demo { padding: clamp(20px, 3vw, 30px); display: grid; gap: 14px; align-content: center; border-left: 1px solid var(--line); background: var(--void); min-width: 0; }
+.input { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: #0e1520; font-family: var(--body); min-width: 0; }
+.input .typed { flex: 1; min-width: 0; color: var(--dust); overflow-wrap: anywhere; }
+.input .typed b { font-family: var(--mono); font-weight: 500; color: var(--brass); }
+.input .caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--signal); animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.input .send { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: #1c1407; background: var(--brass); padding: 5px 10px; border-radius: 3px; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: flow; }
+.flow li { counter-increment: flow; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; font-size: 0.92rem; color: var(--dim); }
+.flow li::before { content: counter(flow); font-family: var(--mono); color: var(--signal); text-align: right; }
+@media (max-width: 880px) { .command { grid-template-columns: minmax(0, 1fr); } .command-demo { border-left: 0; border-top: 1px solid var(--line); } }
+
+/* ── 마지막 ── */
+.final { text-align: left; display: grid; gap: 16px; justify-items: start; }
+.final h2 { font-family: var(--display); font-weight: 900; font-size: var(--step-4); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
+.final h2 span { display: block; font-family: var(--display-ko); font-weight: 400; font-size: var(--step-2); letter-spacing: 0.02em; text-transform: none; color: var(--brass); margin-top: 10px; }
+.final p { color: var(--dim); max-width: 36rem; }
+footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-family: var(--mono); font-size: 0.75rem; color: var(--dim); letter-spacing: 0.06em; }
+
+@media (max-width: 880px) {
+  .hero-inner { grid-template-columns: minmax(0, 1fr); }
+  .timeline { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .timeline li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .timeline li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .planet-entry { grid-template-columns: minmax(0, 1fr); }
+  .planet-entry:nth-child(even) .planet-art { order: 0; }
+  .factions { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .lexicon, .play-grid { grid-template-columns: minmax(0, 1fr); }
+  .label { grid-template-columns: minmax(0, 1fr); }
+  .label > div + div { border-left: 0; border-top: 1px solid rgb(201 91 53 / 0.45); }
+}
+@media (max-width: 560px) {
+  .timeline { grid-template-columns: minmax(0, 1fr); }
+  .timeline li, .timeline li + li { padding-left: 0; border-left: 0; }
+  .timeline li + li { border-top: 1px solid var(--line); }
+  .factions { grid-template-columns: minmax(0, 1fr); }
+  .junk { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .facts dd + dt { margin-top: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-art"><img src="img/gate.webp" alt="격납고 너머로 워프게이트 고리와 푸른 행성이 보인다" width="1600" height="900"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">3412년 · 안티온 성계 / 포르투나 성계</p>
+      <h1>Space<span>Outlaw</span></h1>
+      <p class="ko-title">법이 닿지 않는 두 성계</p>
+      <p class="lead">점프드라이브가 별 사이를 열었고, 내전이 지구를 무너뜨렸다. 이제 행성은 그 행성을 가진 자가 다스린다. 바운티헌터와 해적, 메가코프와 기사단 사이에서 당신의 작은 우주선이 첫 항로를 고른다.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#" data-play><span class="play-label">플레이하기</span></a>
+        <a class="btn btn-ghost" href="#chart">항로도 보기</a>
+      </div>
+    </div>
+    <figure class="status" aria-label="상태창 예시">
+      <div class="status-bar"><span>상태창</span><span>T-1</span></div>
+<pre>T-1｜3412년 05월 11일｜금요일｜09:20｜아침｜🌤️｜<b>셀레스티 - 항만구</b>
+[관계]
+└[모건｜👋]
+[상황｜항만구에 막 내렸다]
+[일정｜-]
+[소지품｜1,250 크레딧, 방탄코트]
+[함선｜이름 없는 배(커터)]
+└[손상｜-]
+└[연료｜<b>60</b>]
+└[화물｜-]</pre>
+      <figcaption>이야기가 한 번 오갈 때마다 날짜, 위치, 관계, 소지품이 이 창에 쌓인다.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section class="band" aria-labelledby="era-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">연대기</p>
+        <h2 id="era-title">지구가 무너진 뒤</h2>
+      </div>
+      <ol class="timeline">
+        <li><h3>점프드라이브</h3><p>34세기, 점프드라이브가 발명되며 성간 이동의 시대가 열린다.</p></li>
+        <li><h3>뉴 홈스테드 법</h3><p>지구 연방정부가 뉴 홈스테드 법을 만들고, 사람들은 개척지를 찾아 별 너머로 떠난다.</p></li>
+        <li><h3>내전</h3><p>지구 연방의 내전으로 달이 부서진다. 그 잔해가 쏟아져 지구는 폐허가 된다.</p></li>
+        <li><h3>자치의 시대</h3><p>행성을 가진 개인과 집단, 기업이 저마다 행성을 다스린다. 지구연합정부의 자리는 안티온 성계정부가 대신한다.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="chart" aria-labelledby="chart-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">항로도</p>
+        <h2 id="chart-title">두 성계</h2>
+        <p>성계 안은 정기 항로로, 성계 사이는 워프게이트로 오간다. 시간은 표준 운항 기준이다. 행성을 누르면 그 행성의 기록으로 간다.</p>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 880 400" role="img" aria-labelledby="chart-svg-title">
+          <title id="chart-svg-title">안티온 성계(아우로라, 셀레스티)와 포르투나 성계(에덴, 뉴오마하, 포르네투가), 두 성계를 잇는 워프 항로</title>
+          <g fill="none" stroke="#2a384d" stroke-width="1">
+            <circle cx="200" cy="190" r="72"/>
+            <circle cx="200" cy="190" r="128"/>
+            <circle cx="650" cy="190" r="58"/>
+            <circle cx="650" cy="190" r="100"/>
+            <circle cx="650" cy="190" r="146"/>
+          </g>
+          <!-- 성계 안 항로 -->
+          <g stroke="#9ea8b6" stroke-width="1" stroke-opacity="0.55" fill="none">
+            <line x1="255" y1="144" x2="311" y2="254"/>
+            <line x1="595" y1="170" x2="700" y2="277"/>
+            <line x1="595" y1="170" x2="744" y2="78"/>
+            <line x1="700" y1="277" x2="744" y2="78"/>
+          </g>
+          <!-- 워프 항로: 아우로라 콜로니 ↔ 에덴 콜로니 -->
+          <path d="M255 144 Q425 40 595 170" fill="none" stroke="#e2a64b" stroke-width="1.6" stroke-dasharray="6 6"/>
+          <g class="mono" font-size="12" fill="#9ea8b6">
+            <text x="293" y="196">4일</text>
+            <text x="657" y="236">2일</text>
+            <text x="652" y="118">7일</text>
+            <text x="730" y="182">5일</text>
+          </g>
+          <text class="mono" x="425" y="82" text-anchor="middle" font-size="12" fill="#e2a64b">워프게이트 · 12시간</text>
+          <!-- 항성 -->
+          <circle cx="200" cy="190" r="13" fill="#e2a64b"/>
+          <circle cx="200" cy="190" r="22" fill="#e2a64b" fill-opacity="0.14"/>
+          <circle cx="650" cy="190" r="13" fill="#f0c27a"/>
+          <circle cx="650" cy="190" r="22" fill="#f0c27a" fill-opacity="0.14"/>
+          <g font-size="13" fill="#7cc4d2" class="mono" text-anchor="middle">
+            <text x="200" y="352">안티온 성계</text>
+            <text x="650" y="372">포르투나 성계</text>
+          </g>
+          <!-- 행성 -->
+          <g font-size="15" fill="#ece4d4">
+            <a href="#p-aurora"><circle class="planet" cx="255" cy="144" r="9" fill="#cfe3f0" stroke="#0b1019" stroke-width="2"/><text x="270" y="140">아우로라</text></a>
+            <a href="#p-celesti"><circle class="planet" cx="311" cy="254" r="9" fill="#6fae73" stroke="#0b1019" stroke-width="2"/><text x="326" y="260">셀레스티</text></a>
+            <a href="#p-eden"><circle class="planet" cx="595" cy="170" r="9" fill="#7c8aa3" stroke="#0b1019" stroke-width="2"/><text x="580" y="166" text-anchor="end">에덴</text></a>
+            <a href="#p-newomaha"><circle class="planet" cx="700" cy="277" r="9" fill="#c46fb0" stroke="#0b1019" stroke-width="2"/><text x="714" y="284">뉴오마하</text></a>
+            <a href="#p-fornetuga"><circle class="planet" cx="744" cy="78" r="9" fill="#c98a52" stroke="#0b1019" stroke-width="2"/><text x="759" y="74">포르네투가</text></a>
+          </g>
+        </svg>
+      </div>
+      <p class="chart-note"><span>성계 안 정기 항로</span><span class="warp">성계 사이 워프 항로</span></p>
+
+      <div class="planets">
+        <article class="planet-entry" id="p-aurora">
+          <div class="planet-art"><img src="img/aurora.webp" alt="하얀 탑과 다리가 늘어선 아우로라의 도시" width="1600" height="900" loading="lazy"><span class="tag">안티온 성계</span></div>
+          <div class="planet-copy">
+            <div class="name"><h3>아우로라</h3><span class="latin">Aurora</span></div>
+            <p>안티온 성계정부가 자리한 행성이다. 두 성계에서 가장 안전하고, 그만큼 검문이 까다롭다. 상선을 몰려면 인증 자격증이 있어야 하고, 마약과 노예, 무기, XBD 거래는 엄격히 막힌다. 그래도 일부 정치인은 에덴, 뉴오마하와 손을 잡고 있다.</p>
+            <dl class="facts">
+              <dt>다스리는 자</dt><dd>안티온 성계정부</dd>
+              <dt>특산품</dt><dd>생필품, 반도체, 첨단 의료기기, 클리퍼급 이상 함선</dd>
+              <dt>이곳에 있는 것</dt><dd>갤럭시 익스프레스(GE) 본사, 워프게이트가 있는 궤도 콜로니</dd>
+              <dt>유행</dt><dd>바운티헌터용 방탄코트</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="planet-entry" id="p-celesti">
+          <div class="planet-art"><img src="img/celesti.webp" alt="숲 사이에 새로 지은 건물이 들어선 셀레스티의 마을" width="1600" height="900" loading="lazy"><span class="tag">안티온 성계</span></div>
+          <div class="planet-copy">
+            <div class="name"><h3>셀레스티</h3><span class="latin">Celesti</span></div>
+            <p>대부분 숲으로 덮인 행성이다. 정부가 짓고 있는 도시들 사이로 상단이 쉬지 않고 오간다. 숲 곳곳에는 미지의 고대 외계문명이 남긴 유적이 서 있다. 나무처럼 생긴 살리움이 자생하는데, 살리옥신의 원료라 정부가 엄격히 규제한다. 규제가 잘 지켜지지는 않는다.</p>
+            <dl class="facts">
+              <dt>다스리는 자</dt><dd>안티온 성계정부 (개발 중)</dd>
+              <dt>맞서는 자</dt><dd>사메라 기사단</dd>
+              <dt>유적</dt><dd>모노, 안텝, 사메</dd>
+              <dt>특산품</dt><dd>천연자원</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="planet-entry" id="p-eden">
+          <div class="planet-art"><img src="img/eden.webp" alt="해 질 녘 하늘 아래 솟은 에덴의 기업 탑" width="1600" height="900" loading="lazy"><span class="tag">포르투나 성계</span></div>
+          <div class="planet-copy">
+            <div class="name"><h3>에덴</h3><span class="latin">Eden</span></div>
+            <p>사이버웨어 기술이 가장 앞선 행성이다. 메가코프 에이도스와 오미츠카가 땅을 나눠 다스리고, 각자의 경호팀이 치안을 맡는다. 사이버웨어에 꼭 필요한 광물 리그늄이 이곳에서만 나서, 두 회사는 채굴권을 두고 다툰다. 빈부격차가 극심하다. 행성을 떠나는 데 평균 300만 크레딧이 들어 대부분의 주민은 떠나지 못한다.</p>
+            <dl class="facts">
+              <dt>다스리는 자</dt><dd>에이도스, 오미츠카</dd>
+              <dt>특산품</dt><dd>사이버웨어, 리그늄, 군사용 무기</dd>
+              <dt>의료</dt><dd>비싸고 멀다. 부유층 전용 응급의료팀이 따로 있다</dd>
+              <dt>정부와의 관계</dt><dd>안티온 성계정부와 암묵적인 불간섭 협정</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="planet-entry" id="p-newomaha">
+          <div class="planet-art"><img src="img/newomaha.webp" alt="분수와 야자수 너머로 빛나는 뉴오마하의 카지노" width="1600" height="900" loading="lazy"><span class="tag">포르투나 성계</span></div>
+          <div class="planet-copy">
+            <div class="name"><h3>뉴오마하</h3><span class="latin">New Omaha</span></div>
+            <p>포르투나 성계의 환락가다. 카지노와 유흥 산업이 도시를 먹여 살리고, 실질적인 지배자는 카지노 주인 레지나다. 지하 격투장에는 규칙이 없다. 오크 막시무스가 몇 년째 챔피언 자리를 지키고 있다. 경매장에서는 사람에게도 값이 매겨진다.</p>
+            <dl class="facts">
+              <dt>다스리는 자</dt><dd>카지노 주인 레지나</dd>
+              <dt>이름난 곳</dt><dd>카지노, 지하 격투장, 정기 경매</dd>
+              <dt>특산품</dt><dd>유흥 상품</dd>
+              <dt>사는 이들</dt><dd>인간과 엘프, 수인, 오크 같은 이종족</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="planet-entry" id="p-fornetuga">
+          <div class="planet-art"><img src="img/fornetuga.webp" alt="천막과 상자가 늘어선 포르네투가의 시장 골목" width="1600" height="900" loading="lazy"><span class="tag">포르투나 성계</span></div>
+          <div class="planet-copy">
+            <div class="name"><h3>포르네투가</h3><span class="latin">Fornetuga</span></div>
+            <p>범죄자들이 숨어드는 무법 행성이다. 해적과 마피아, 마약상, 밀수업자, 정커가 모여 산다. 안티온 성계정부는 이곳을 정리하고 싶어 하지만 힘이 닿지 않는다. 주인 없는 행성을 두고 여러 세력이 다툰다.</p>
+            <dl class="facts">
+              <dt>치안</dt><dd>없다</dd>
+              <dt>특산품</dt><dd>불법 약물, 살리옥신, XBD</dd>
+              <dt>쓰임</dt><dd>두 성계로 흘러가는 불법 상품의 길목</dd>
+              <dt>유행</dt><dd>고가 방탄코트. 아직 흔하지는 않다</dd>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="faction-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">세력</p>
+        <h2 id="faction-title">누가 무엇을 쥐고 있나</h2>
+      </div>
+      <div class="factions">
+        <article class="faction"><p class="where">아우로라</p><h3>안티온 성계정부</h3><p>지구연합정부를 대신한 정부. 포르투나 성계도 이름으로는 관할하지만 실제로 손이 닿지는 않는다.</p></article>
+        <article class="faction"><p class="where">안티온 성계정부 국세청</p><h3>SRC</h3><p>일당백의 징수요원들. 안티온 성계에서 생긴 세금은 무슨 일이 있어도 걷는다.</p></article>
+        <article class="faction"><p class="where">에덴</p><h3>에이도스</h3><p>통제와 관제를 맡는 사이버웨어를 만든다. 사격 보조, 열화상 시야, 해킹, 통신 재머, 호르몬 조절.</p></article>
+        <article class="faction"><p class="where">에덴</p><h3>오미츠카</h3><p>몸을 강하게 만드는 사이버웨어를 만든다. 신체와 시력, 청각 강화, 골격과 외피 강화.</p></article>
+        <article class="faction"><p class="where">셀레스티</p><h3>사메라 기사단</h3><p>고대 외계문명의 부흥과 왕국 재건을 꿈꾸는 종교 단체. 입단할 때 살리옥신을 마시고 새 이름을 받는다. 광선검을 들고, 과복용으로 생긴 뇌 손상을 ‘접촉’이라 부르며 신성하게 여긴다. 세간에서는 고전 SF의 기사단을 흉내 내는 중독자 집단이라고 비웃는다.</p></article>
+        <article class="faction"><p class="where">아우로라 본사</p><h3>갤럭시 익스프레스</h3><p>줄여서 GE. 물자든 데이터든 정보든, 두 성계 어디로든 실어 나른다.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="lexicon-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">이 우주에서 쓰는 말</p>
+        <h2 id="lexicon-title">배에 오르기 전에 알아 둘 것</h2>
+      </div>
+      <div class="lexicon">
+        <div class="ships">
+          <table>
+            <caption>우주선 등급</caption>
+            <thead><tr><th scope="col">등급</th><th scope="col">인원</th><th scope="col">쓰임</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">커터</th><td class="crew">1–6인</td><td>거주 구역을 갖춘 소형 독립선. 용병, 해적, 밀수꾼, 바운티헌터가 두루 쓴다</td></tr>
+              <tr><th scope="row">클리퍼</th><td class="crew">6–12인</td><td>대형 화물칸 같은 전문 구역을 갖춘 중형선. 기업 운송과 탐사</td></tr>
+              <tr><th scope="row">쉽</th><td class="crew">12인–</td><td>정부군 전함, 대형 유흥 크루즈 같은 대형 함선</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <dl class="terms">
+          <div><dt>BH <small>바운티헌터</small></dt><dd>현상금을 쫓는 사냥꾼. 대개 혼자 다닌다.</dd></div>
+          <div><dt>방탄코트</dt><dd>총알과 블라스터를 막아 주는 비싼 코트. 맞아도 죽지는 않지만 멍은 든다.</dd></div>
+          <div><dt>BD <small>브레인 디스크</small></dt><dd>담긴 정보를 뇌에 흘려 현실처럼 겪게 한다. 여가와 교육에 쓴다. 허가받지 않은 XBD는 포르네투가와 뉴오마하에서 만들어지고, 불법적인 경험이 담긴다.</dd></div>
+          <div><dt>리그늄</dt><dd>에덴에서만 나는 희귀 광물. 이것 없이는 사이버웨어를 만들 수 없다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="junk">
+        <img src="img/junk.webp" alt="붉은 행성 궤도에 떠 있는 부서진 우주선 잔해" width="1600" height="900" loading="lazy">
+        <div class="junk-copy">
+          <p class="eyebrow">직업</p>
+          <h3>정커</h3>
+          <p>행성 궤도를 떠도는 고물을 건져 파는 사람들. 포르네투가와 셀레스티 궤도에 특히 많다. 부서진 배 한 척이 누군가에게는 한 달 생활비다.</p>
+        </div>
+      </div>
+
+      <div class="label" aria-label="살리옥신">
+        <div><p class="k">물질</p><h3>살리옥신</h3><p>셀레스티의 살리움에서 뽑는 오렌지색 액체. 주사나 카트리지로 쓴다. 뒷골목에서는 성수, 멜란지라고 부른다.</p></div>
+        <div><p class="k">효과</p><ul><li>시간이 느리게 흐르는 듯한 감각</li><li>예민해진 감각과 근미래 예지</li><li>통증이 사라지고 도파민이 쏟아진다</li><li>사이버웨어 부작용 완화, 전투력 향상</li></ul></div>
+        <div><p class="k">경고</p><ul><li>중독성이 강하고 끊기 어렵다</li><li>정신착란, 자아분열</li><li>과복용하면 뇌가 타버린다</li><li>부작용은 서서히 나타난다</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="cast-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">사람들</p>
+        <h2 id="cast-title">항로 위에서 만나게 될 이들</h2>
+      </div>
+      <div class="filters" role="group" aria-label="행성으로 거르기">
+        <button type="button" id="f-all" data-filter="all" aria-pressed="true">전체</button>
+        <button type="button" id="f-aurora" data-filter="아우로라" aria-pressed="false">아우로라</button>
+        <button type="button" id="f-celesti" data-filter="셀레스티" aria-pressed="false">셀레스티</button>
+        <button type="button" id="f-eden" data-filter="에덴" aria-pressed="false">에덴</button>
+        <button type="button" id="f-newomaha" data-filter="뉴오마하" aria-pressed="false">뉴오마하</button>
+        <button type="button" id="f-fornetuga" data-filter="포르네투가" aria-pressed="false">포르네투가</button>
+      </div>
+      <ul class="cast" id="cast">
+        <li data-place="아우로라"><div class="face"><img src="img/cast/l.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>레아</b><span>아우로라</span></p><p class="role">바운티헌터</p><p class="trait">몽상가. 제 속도대로 움직이고 혼자 다닌다.</p><p class="arms">방탄코트 · 블라스터건</p></li>
+        <li data-place="아우로라"><div class="face"><img src="img/cast/e.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>에스더</b><span>아우로라</span></p><p class="role">바운티헌터</p><p class="trait">냉정하고 시니컬하다. 역시 혼자 다닌다.</p><p class="arms">방탄코트 · 블라스터건</p></li>
+        <li data-place="아우로라"><div class="face"><img src="img/cast/i.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>이리스</b><span>아우로라</span></p><p class="role">보안관</p><p class="trait">정의감이 강하고 당돌하다.</p><p class="arms">블라스터건</p></li>
+        <li data-place="아우로라"><div class="face"><img src="img/cast/s.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>세아</b><span>아우로라</span></p><p class="role">탈출한 실험체</p><p class="trait">조용하고 존댓말을 쓴다. 약탈당한 배나 표류하는 배에서 처음 마주친다.</p><p class="arms">염력</p></li>
+        <li data-place="셀레스티"><div class="face"><img src="img/cast/o.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>오필리아</b><span>셀레스티</span></p><p class="role">사메라 기사단원 · 엘프</p><p class="trait">차갑게 굴지만 속은 여리다.</p><p class="arms">광선검 · 방탄코트</p></li>
+        <li data-place="셀레스티"><div class="face"><img src="img/cast/p.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>모건</b><span>셀레스티</span></p><p class="role">SRC 징수요원</p><p class="trait">말이 없고 해결 방식은 간단하다. 인간병기.</p><p class="arms">빔 매그넘 2정 · 방탄코트</p></li>
+        <li data-place="에덴"><div class="face"><img src="img/cast/w.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>레이스</b><span>에덴</span></p><p class="role">넷러너</p><p class="trait">차갑고 시니컬하다. 에덴 밖으로 나가고 싶어 한다.</p><p class="arms">모노와이어 · 해킹툴</p></li>
+        <li data-place="에덴"><div class="face"><img src="img/cast/d.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>이든</b><span>에덴</span></p><p class="role">에이도스 간부</p><p class="trait">감정이 없고 철저하다. 격식을 갖춰 말한다.</p><p class="arms">오른팔 의수 · 암캐논</p></li>
+        <li data-place="에덴"><div class="face"><img src="img/cast/n.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>렌</b><span>에덴</span></p><p class="role">오미츠카 간부</p><p class="trait">충성스럽고 냉소적이다.</p><p class="arms">강화 의안 · 빔 피스톨</p></li>
+        <li data-place="에덴"><div class="face"><img src="img/cast/b.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>블랙잭</b><span>에덴</span></p><p class="role">리퍼닥</p><p class="trait">유쾌하고 말이 많은 매드 사이언티스트.</p><p class="arms">양팔 의수</p></li>
+        <li data-place="뉴오마하"><div class="face"><img src="img/cast/g.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>레지나</b><span>뉴오마하</span></p><p class="role">카지노 주인</p><p class="trait">도시의 실질적인 지배자. 겉보기 나이로는 짐작할 수 없다.</p><p class="arms">—</p></li>
+        <li data-place="뉴오마하"><div class="face"><img src="img/cast/x.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>막시무스</b><span>뉴오마하</span></p><p class="role">지하 격투장 챔피언 · 오크</p><p class="trait">과시욕과 욕심이 크다.</p><p class="arms">양팔 금색 강화 의수</p></li>
+        <li data-place="뉴오마하"><div class="face"><img src="img/cast/c.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>스텔라</b><span>뉴오마하</span></p><p class="role">탈출한 엘프</p><p class="trait">대담하다. 도움을 받으면 그 빚을 잊지 않는다.</p><p class="arms">—</p></li>
+        <li data-place="뉴오마하"><div class="face"><img src="img/cast/y.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>미아</b><span>뉴오마하</span></p><p class="role">고양이 수인</p><p class="trait">쿨하게 굴지만 친해지면 놓아주지 않는다.</p><p class="arms">—</p></li>
+        <li data-place="뉴오마하"><div class="face"><img src="img/cast/v.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>레이</b><span>뉴오마하</span></p><p class="role">GE 배송 요원</p><p class="trait">차갑고 다정하고 이기적이다. 셋 다 맞다.</p><p class="arms">블라스터건 · 방탄코트</p></li>
+        <li data-place="포르네투가"><div class="face"><img src="img/cast/f.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>페이</b><span>포르네투가</span></p><p class="role">해적</p><p class="trait">방아쇠가 가볍다. 광기가 있다.</p><p class="arms">빔 카빈 2정</p></li>
+        <li data-place="포르네투가"><div class="face"><img src="img/cast/u.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>엠버</b><span>포르네투가</span></p><p class="role">해적 · 밀수업자</p><p class="trait">염세적인 골초. 레이나와 한 팀이다.</p><p class="arms">SMG 2정</p></li>
+        <li data-place="포르네투가"><div class="face"><img src="img/cast/a.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>레이나</b><span>포르네투가</span></p><p class="role">해적</p><p class="trait">낭만주의자. 엠버와 한 팀이다.</p><p class="arms">블라스터 권총</p></li>
+        <li data-place="포르네투가"><div class="face"><img src="img/cast/h.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>린</b><span>포르네투가</span></p><p class="role">정보상</p><p class="trait">거만한데 허당이다. 태세 전환이 빠르다.</p><p class="arms">권총</p></li>
+        <li data-place="포르네투가"><div class="face"><img src="img/cast/m.webp" alt="" width="438" height="640" loading="lazy"></div><p class="who"><b>미</b><span>포르네투가</span></p><p class="role">정커</p><p class="trait">포르네투가 토박이. 소박하고 당돌하다.</p><p class="arms">블라스터건</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">어떻게 노는가</p>
+        <h2 id="how-title">AI 롤플레잉을 비주얼 노벨 화면으로</h2>
+        <p>크랙에서 AI와 나누는 이야기가 배경과 인물, 대사창이 있는 비주얼 노벨 화면으로 펼쳐진다.</p>
+      </div>
+      <div class="play-grid">
+        <ol class="steps">
+          <li><b>당신의 행동은 시도다</b><span>무엇을 하든 결과는 이야기가 정한다. 실패할 수도 있다.</span></li>
+          <li><b>상태창이 기록한다</b><span>날짜와 시각, 위치, 소지품, 함선의 연료와 손상이 응답마다 갱신된다.</span></li>
+          <li><b>항행 지도로 오간다</b><span>메뉴의 항행 지도나 입력창 명령 <code>\항해</code> 로 지도를 연다. 목적지와 항로를 고르면, 이동은 이야기 속 시간으로 흐른다. 성계를 넘으려면 워프게이트를 지나야 한다.</span></li>
+          <li><b>사이버웨어를 들여다본다</b><span>몸에 심은 장비가 부위별로 정리된다.</span></li>
+        </ol>
+        <div class="ladder">
+          <h3>관계는 앞으로도 뒤로도 움직인다</h3>
+          <ol aria-label="관계 단계, 혐오에서 연인까지">
+            <li><span class="e">🤮</span><span class="t">혐오</span></li>
+            <li><span class="e">😠</span><span class="t">갈등</span></li>
+            <li><span class="e">💥</span><span class="t">짜증</span></li>
+            <li><span class="e">😞</span><span class="t">실망</span></li>
+            <li><span class="e">🧐</span><span class="t">경계</span></li>
+            <li><span class="e">😑</span><span class="t">중립</span></li>
+            <li><span class="e">👋</span><span class="t">일면식</span></li>
+            <li><span class="e">🤝</span><span class="t">얕은 신뢰</span></li>
+            <li><span class="e">😊</span><span class="t">호감</span></li>
+            <li><span class="e">😄</span><span class="t">친구</span></li>
+            <li><span class="e">🤗</span><span class="t">절친</span></li>
+            <li><span class="e">🫣</span><span class="t">짝사랑</span></li>
+            <li><span class="e">💓</span><span class="t">연인</span></li>
+          </ol>
+          <p>모든 인물은 상태창의 관계 칸에서 이 단계 중 하나에 놓인다. 연인이 되려면 어느 한쪽의 고백과 승낙이 있어야 한다.</p>
+        </div>
+      </div>
+      <div class="command">
+        <div class="command-copy">
+          <p class="eyebrow">입력창 명령</p>
+          <h3><code>\항해</code> 한 줄이면 출항</h3>
+          <p>대화 입력창에 <code>\항해</code> 를 넣어 보내면, 글이 바로 나가지 않고 항행 지도가 먼저 열린다. <code>\항행</code> 으로 써도 된다. 명령은 문장 어디에 넣어도 되고, 보낼 때는 떼어 낸다.</p>
+        </div>
+        <div class="command-demo" aria-label="입력창 명령 예시">
+          <div class="input"><span class="typed"><b>\항해</b> 연료 넣고 셀레스티로 가자<span class="caret" aria-hidden="true"></span></span><span class="send">보내기</span></div>
+          <ol class="flow">
+            <li>항행 지도가 열리고, 쓴 글은 잠시 보관된다</li>
+            <li>목적지와 항로를 고르고 출발한다</li>
+            <li>도착하면 보관한 글이 도착 소식과 함께 이야기로 나간다</li>
+            <li>아무것도 하지 않고 지도를 닫으면 글은 입력창으로 돌아온다</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="start" aria-labelledby="final-title">
+    <div class="wrap final">
+      <h2 id="final-title">Choose Your Route<span>첫 항로를 고를 시간</span></h2>
+      <p>이야기는 셀레스티의 항만구에서 시작한다. 그다음 어디로 갈지는 당신이 정한다.</p>
+      <a class="btn btn-solid" href="#" data-play><span class="play-label">플레이하기</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">SPACE OUTLAW · 스페이스오페라 · 사이버펑크 · 서부극</div>
+</footer>
+
+<script>
+// 플레이하기 버튼이 갈 곳. 크랙 작품 주소가 정해지면 아래 따옴표 안에 넣는다.
+const PLAY_URL = '';
+
+document.querySelectorAll('[data-play]').forEach(link => {
+  if (PLAY_URL) {
+    link.href = PLAY_URL;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    return;
+  }
+  link.setAttribute('aria-disabled', 'true');
+  const soon = document.createElement('span');
+  soon.className = 'soon';
+  soon.textContent = '곧 열립니다';
+  link.append(soon);
+  // 주소가 정해지기 전에는 눌러도 아무 데도 가지 않는다
+  link.addEventListener('click', event => event.preventDefault());
+});
+
+// 사람들: 행성으로 거르기
+const buttons = document.querySelectorAll('.filters button');
+const people = document.querySelectorAll('#cast li');
+buttons.forEach(button => button.addEventListener('click', () => {
+  const place = button.dataset.filter;
+  buttons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+  people.forEach(person => { person.hidden = place !== 'all' && person.dataset.place !== place; });
+}));
+</script>
+
+</body>
+</html>
