@@ -82,29 +82,30 @@ p { margin: 0; }
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(90deg, rgb(11 16 25 / 0.94) 0%, rgb(11 16 25 / 0.78) 42%, rgb(11 16 25 / 0.2) 75%, rgb(11 16 25 / 0.45) 100%),
+    linear-gradient(90deg, rgb(11 16 25 / 0.94) 0%, rgb(11 16 25 / 0.86) 42%, rgb(11 16 25 / 0.72) 75%, rgb(11 16 25 / 0.78) 100%),
     linear-gradient(0deg, var(--void) 0%, rgb(11 16 25 / 0) 38%);
 }
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  align-items: end;
-  gap: clamp(24px, 4vw, 56px);
-  padding-block: clamp(72px, 12vw, 148px) clamp(48px, 7vw, 80px);
+  gap: 24px;
+  padding-block: 24px 40px;
 }
-.hero-copy { display: grid; gap: 18px; min-width: 0; }
+.hero-topline { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; }
+.hero-topline a { color: var(--dim); font-size: 0.8rem; text-decoration: none; }
+.hero-topline a:hover { color: var(--brass); }
+.hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: 20px 48px; min-width: 0; }
 .hero h1 {
   font-family: var(--display);
   font-weight: 900;
-  font-size: clamp(3.4rem, 11vw, 8.5rem);
-  line-height: 0.86;
+  font-size: clamp(3rem, 6.4vw, 5rem);
+  line-height: 0.95;
   letter-spacing: 0.015em;
   text-transform: uppercase;
   color: var(--dust);
 }
-.hero h1 span { display: block; color: var(--brass); }
-.hero .ko-title { font-family: var(--display-ko); font-size: var(--step-2); color: var(--dust); letter-spacing: 0.02em; }
-.hero .lead { max-width: 34rem; color: #d6d9de; font-size: var(--step-1); line-height: 1.75; }
+.hero h1 span { color: var(--brass); }
+.hero .ko-title { margin-top: 10px; font-family: var(--display-ko); font-size: var(--step-1); color: var(--dust); letter-spacing: 0.02em; }
+.hero .lead { max-width: 34rem; color: #d6d9de; font-size: 0.95rem; line-height: 1.8; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
@@ -123,18 +124,35 @@ p { margin: 0; }
 .btn-solid[aria-disabled="true"] { background: var(--hull-2); color: var(--dim); border-color: var(--line); }
 .btn .soon { font-size: 0.72rem; letter-spacing: 0.06em; color: var(--dim); text-transform: none; }
 
-/* 상태창: 게임이 매 응답 끝에 내놓는 정보창 */
-.status {
-  min-width: 0;
-  background: rgb(10 15 23 / 0.86);
-  border: 1px solid var(--line);
-  border-top: 2px solid var(--signal);
-  backdrop-filter: blur(6px);
-}
-.status-bar { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--signal); text-transform: uppercase; }
-.status pre { margin: 0; padding: 14px; font-family: var(--mono); font-size: 0.8rem; line-height: 1.75; color: #cfe3e8; white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
-.status pre b { color: var(--brass); font-weight: 500; }
-.status figcaption { padding: 8px 14px 12px; font-size: 0.78rem; color: var(--dim); }
+/* 실제 플레이와 바로 받을 수 있는 작품 카트리지 */
+.gameplay { margin: 0; background: #080d15; border: 1px solid var(--line); border-top: 2px solid var(--signal); box-shadow: 0 20px 70px rgb(0 0 0 / 0.3); }
+.gameplay-bar { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); color: var(--signal); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; }
+.gameplay-bar span:first-child::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--signal); vertical-align: middle; }
+.gameplay img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.gameplay figcaption { padding: 9px 14px; color: var(--dim); font-size: 0.78rem; }
+.hero-download { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px 28px; }
+.hero-download h2 { font-family: var(--display-ko); font-size: var(--step-1); font-weight: 400; }
+.hero-download p { margin-top: 4px; color: var(--dim); font-size: 0.8rem; }
+.hero-download .cta-row { margin: 0; }
+.quick-links { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.8rem; }
+.quick-links a { color: var(--dim); text-decoration: none; }
+.quick-links a:hover { color: var(--brass); }
+.setup { scroll-margin-top: 24px; }
+.setup-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
+.cartridge-card { display: grid; gap: 18px; padding: clamp(22px, 4vw, 32px); border: 1px solid var(--line); border-top: 2px solid var(--brass); background: var(--hull); }
+.cartridge-card h3 { font-family: var(--display); font-size: 2.25rem; line-height: 1; letter-spacing: 0.03em; }
+.cartridge-card > p { color: var(--dim); font-size: 0.9rem; }
+.cartridge-card .btn { justify-content: center; }
+.cartridge-card .file-info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; color: var(--dim); font-family: var(--mono); font-size: 0.72rem; }
+.setup-features { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.setup-features li { padding: 3px 8px; border: 1px solid var(--line); color: var(--signal); font-size: 0.75rem; }
+.setup-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 22px; counter-reset: setup; }
+.setup-steps li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; counter-increment: setup; }
+.setup-steps li::before { content: counter(setup, decimal-leading-zero); padding-top: 3px; color: var(--brass); font-family: var(--mono); font-size: 0.82rem; }
+.setup-steps h3 { font-family: var(--display-ko); font-weight: 400; font-size: var(--step-1); }
+.setup-steps p { margin-top: 5px; color: var(--dim); font-size: 0.92rem; }
+.setup code { padding: 2px 5px; background: var(--hull-2); color: var(--dust); font-family: var(--mono); font-size: 0.86em; }
+.setup-note { margin-top: 28px; padding: 15px 18px; border-left: 2px solid var(--signal); background: rgb(124 196 210 / 0.06); color: var(--dim); font-size: 0.85rem; }
 
 /* ── 연대기 ── */
 .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); counter-reset: era; }
@@ -280,7 +298,7 @@ p { margin: 0; }
 footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-family: var(--mono); font-size: 0.75rem; color: var(--dim); letter-spacing: 0.06em; }
 
 @media (max-width: 880px) {
-  .hero-inner { grid-template-columns: minmax(0, 1fr); }
+  .hero-copy, .setup-grid { grid-template-columns: minmax(0, 1fr); }
   .timeline { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .timeline li:nth-child(3) { padding-left: 0; border-left: 0; }
   .timeline li:nth-child(n+3) { border-top: 1px solid var(--line); }
@@ -292,6 +310,12 @@ footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-famil
   .label > div + div { border-left: 0; border-top: 1px solid rgb(201 91 53 / 0.45); }
 }
 @media (max-width: 560px) {
+  .hero-inner { gap: 18px; padding-top: 18px; }
+  .hero .lead { font-size: 0.86rem; }
+  .hero-download .cta-row, .hero-download .btn { width: 100%; }
+  .hero-download .btn { justify-content: center; }
+  .gameplay-bar { font-size: 0.62rem; padding-inline: 10px; }
+  .gameplay figcaption { padding-inline: 10px; font-size: 0.72rem; }
   .timeline { grid-template-columns: minmax(0, 1fr); }
   .timeline li, .timeline li + li { padding-left: 0; border-left: 0; }
   .timeline li + li { border-top: 1px solid var(--line); }
@@ -307,35 +331,65 @@ footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-famil
 <header class="hero">
   <div class="hero-art"><img src="img/gate.webp" alt="격납고 너머로 워프게이트 고리와 푸른 행성이 보인다" width="1600" height="900"></div>
   <div class="wrap hero-inner">
+    <div class="hero-topline">
+      <p class="eyebrow">스페이스오페라 · 사이버펑크 · 서부극</p>
+      <a href="https://c3ak.github.io/Visual_Novel_Engine_for_Crack/" target="_blank" rel="noopener">VN 엔진 v4 설치 안내 ↗</a>
+    </div>
     <div class="hero-copy">
-      <p class="eyebrow">3412년 · 안티온 성계 / 포르투나 성계</p>
-      <h1>Space<span>Outlaw</span></h1>
-      <p class="ko-title">법이 닿지 않는 두 성계</p>
+      <div>
+        <h1>Space <span>Outlaw</span></h1>
+        <p class="ko-title">법이 닿지 않는 두 성계</p>
+      </div>
       <p class="lead">점프드라이브가 별 사이를 열었고, 내전이 지구를 무너뜨렸다. 이제 행성은 그 행성을 가진 자가 다스린다. 바운티헌터와 해적, 메가코프와 기사단 사이에서 당신의 작은 우주선이 첫 항로를 고른다.</p>
+    </div>
+    <figure class="gameplay" id="gameplay" aria-labelledby="gameplay-caption">
+      <div class="gameplay-bar"><span>실제 플레이</span><span>VN ENGINE v4</span></div>
+      <img src="img/gameplay.gif" alt="SPACE OUTLAW 실제 플레이. 인물과 배경, 대사창이 표시되고 메뉴에서 항행 지도 등 작품 전용 화면을 여는 모습" width="1280" height="720" fetchpriority="high" decoding="async">
+      <figcaption id="gameplay-caption">크랙에서 VN 엔진과 작품 카트리지를 적용한 실제 화면입니다. GIF는 자동으로 재생됩니다.</figcaption>
+    </figure>
+    <div class="hero-download">
+      <div><h2>SPACE OUTLAW 세이프 카트리지</h2><p>v2.22.0-s · 약 74.5 MB · VN 엔진 v4에서 사용</p></div>
       <div class="cta-row">
-        <a class="btn btn-solid" href="#" data-play><span class="play-label">플레이하기</span></a>
-        <a class="btn btn-ghost" href="#chart">항로도 보기</a>
+        <a class="btn btn-solid" href="https://github.com/c3ak/space-outlaw/releases/download/v2.22.0-s/space-outlaw-S.vncartridge" download>세이프 카트리지 다운로드 <span aria-hidden="true">↓</span></a>
+        <a class="btn btn-ghost" href="https://share.crack.wrtn.ai/5z82ksj" target="_blank" rel="noopener" data-play><span class="play-label">플레이하기</span> <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="#install">카트리지 적용법 <span aria-hidden="true">↓</span></a>
       </div>
     </div>
-    <figure class="status" aria-label="상태창 예시">
-      <div class="status-bar"><span>상태창</span><span>T-1</span></div>
-<pre>T-1｜3412년 05월 11일｜금요일｜09:20｜아침｜🌤️｜<b>셀레스티 - 항만구</b>
-[관계]
-└[모건｜👋]
-[상황｜항만구에 막 내렸다]
-[일정｜-]
-[소지품｜1,250 크레딧, 방탄코트]
-[함선｜이름 없는 배(커터)]
-└[손상｜-]
-└[연료｜<b>60</b>]
-└[화물｜-]</pre>
-      <figcaption>이야기가 한 번 오갈 때마다 날짜, 위치, 관계, 소지품이 이 창에 쌓인다.</figcaption>
-    </figure>
+    <nav class="quick-links" aria-label="작품 소개 바로가기">
+      <a href="#era">세계관</a><a href="#chart">항로도와 행성</a><a href="#cast-title">등장인물</a><a href="#how-title">플레이 방법</a>
+    </nav>
   </div>
 </header>
 
 <main>
-  <section class="band" aria-labelledby="era-title">
+  <section class="band setup" id="install" aria-labelledby="setup-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">플레이 준비</p>
+        <h2 id="setup-title">카트리지 적용하기</h2>
+        <p>VN 엔진을 먼저 설치하고, 이 작품의 카트리지를 한 번 넣어 주세요. 카트리지는 압축을 풀거나 내용을 수정하지 않고 받은 파일 그대로 사용합니다.</p>
+      </div>
+      <div class="setup-grid">
+        <aside class="cartridge-card" aria-label="작품 카트리지 다운로드">
+          <p class="eyebrow">세이프 버전 · 작품 전용 확장 파일</p>
+          <h3>SPACE OUTLAWS</h3>
+          <p>항행 지도, 사이버웨어, 시작 설정을 담은 세이프 버전 카트리지입니다.</p>
+          <ul class="setup-features"><li>항행 지도</li><li>사이버웨어</li><li>시작 설정</li></ul>
+          <a class="btn btn-solid" href="https://github.com/c3ak/space-outlaw/releases/download/v2.22.0-s/space-outlaw-S.vncartridge" download>세이프 카트리지 다운로드 <span aria-hidden="true">↓</span></a>
+          <div class="file-info"><span>space-outlaw-S.vncartridge</span><span>v2.22.0-s · 74.5 MB</span></div>
+        </aside>
+        <ol class="setup-steps">
+          <li><div><h3>VN 엔진 v4 설치</h3><p><a href="https://c3ak.github.io/Visual_Novel_Engine_for_Crack/" target="_blank" rel="noopener">VN 엔진 설치 안내 ↗</a>를 따라 사용자 스크립트 관리자에 엔진을 설치합니다. 설치를 마쳤다면 크랙 페이지를 새로고침합니다.</p></div></li>
+          <li><div><h3>카트리지 받기</h3><p>다운로드 버튼을 눌러 <code>space-outlaw-S.vncartridge</code>를 저장합니다. 파일 확장자는 <code>.vncartridge</code> 그대로 둡니다.</p></div></li>
+          <li><div><h3>라이브러리에 파일 넣기</h3><p>크랙의 VN 제어판에서 <code>설정</code> → <code>📚 라이브러리</code> → <code>파일 선택</code>을 누르고 받은 파일을 고릅니다. PC에서는 점선 영역에 파일을 끌어 놓아도 됩니다.</p></div></li>
+          <li><div><h3>확인하고 작품에서 시작</h3><p>카트리지 이름이 <strong>SPACE OUTLAWS</strong>, 버전이 <strong>2.22.0-s</strong>인지 확인하고 <code>확인</code>을 눌러 저장합니다. 이 작품의 채팅방에서 <code>VN 시작</code>을 누르면 됩니다. 다음부터는 저장된 카트리지가 자동으로 적용됩니다.</p></div></li>
+        </ol>
+      </div>
+      <p class="setup-note">다른 작품의 채팅방에서 파일을 넣었다면 라이브러리에 저장만 됩니다. SPACE OUTLAW 채팅방으로 이동하면 자동으로 적용됩니다. 폰에서는 가로 화면으로 플레이해 주세요.</p>
+    </div>
+  </section>
+
+  <section class="band" id="era" aria-labelledby="era-title">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">연대기</p>
@@ -635,7 +689,7 @@ footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-famil
     <div class="wrap final">
       <h2 id="final-title">Choose Your Route<span>첫 항로를 고를 시간</span></h2>
       <p>이야기는 셀레스티의 항만구에서 시작한다. 그다음 어디로 갈지는 당신이 정한다.</p>
-      <a class="btn btn-solid" href="#" data-play><span class="play-label">플레이하기</span></a>
+      <a class="btn btn-solid" href="https://share.crack.wrtn.ai/5z82ksj" target="_blank" rel="noopener" data-play><span class="play-label">플레이하기</span></a>
     </div>
   </section>
 </main>
@@ -645,8 +699,8 @@ footer { border-top: 1px solid var(--line); padding-block: 24px 32px; font-famil
 </footer>
 
 <script>
-// 플레이하기 버튼이 갈 곳. 크랙 작품 주소가 정해지면 아래 따옴표 안에 넣는다.
-const PLAY_URL = '';
+// SPACE OUTLAW 작품 공유 주소.
+const PLAY_URL = 'https://share.crack.wrtn.ai/5z82ksj';
 
 document.querySelectorAll('[data-play]').forEach(link => {
   if (PLAY_URL) {
